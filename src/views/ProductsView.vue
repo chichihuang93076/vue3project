@@ -25,10 +25,10 @@
       <td>{{item.category}}</td>
       <td>{{item.title}}</td>
       <td class="text-right">
-        {{item.origin_price}}
+        {{ $filters.currency(item.origin_price) }}
       </td>
       <td class="text-right">
-        {{item.price}}
+        {{ $filters.currency(item.price) }}
       </td>
       <td>
         <span class="text-success" v-if="item.is_enabled">啟用</span>
@@ -130,11 +130,7 @@ export default {
               title: '更新成功',
             });
           } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: res.data.message.join('、'),
-            });
+            this.$httpMessageState(res, '產品更新');
           }
         });
     },

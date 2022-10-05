@@ -8,15 +8,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="logout">登出</a>
-        </li>
+        <router-link to="/dashboard/products" class="nav-link">產品</router-link>
+        <router-link to="/dashboard/orders" class="nav-link">訂單</router-link>
+        <router-link to="/dashboard/coupons" class="nav-link">優惠券</router-link>
+        <a class="nav-link" href="#" @click.prevent="logout">登出</a>
       </ul>
     </div>
   </div>
@@ -34,6 +29,9 @@ export default {
             this.$router.push('/login');
           }
         });
+    },
+    productlink() {
+      this.$router.push('/dashboard/products');
     },
   },
 };
