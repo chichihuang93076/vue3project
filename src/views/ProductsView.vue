@@ -116,7 +116,7 @@ export default {
         .then((res) => {
           console.log(res);
           productComponent.hideModal();
-          if (res.data.message.success) {
+          if (res.data.success) {
             this.getProducts();
             this.emitter.emit('push-message', {
               style: 'success',
