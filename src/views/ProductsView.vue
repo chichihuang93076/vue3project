@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="text-end">
     <button
       class="btn btn-primary"
@@ -66,19 +67,23 @@ export default {
     ProductModal,
     DelModal,
   },
+  inject: ['emitter'],
   data() {
     return {
       products: [],
       pagination: {},
       tempProduct: {},
       isNew: false,
+      isLoading: false,
     };
   },
   methods: {
     getProducts() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`;
+      this.isLoading = true;
       this.$http.get(api)
         .then((res) => {
+          this.isLoading = false;
           if (res.data.success) {
             this.products = res.data.products;
             this.pagination = res.data.pagination;
@@ -111,7 +116,19 @@ export default {
         .then((res) => {
           console.log(res);
           productComponent.hideModal();
-          this.getProducts();
+          if (res.data.message.success) {
+            this.getProducts();
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '更新成功',
+            });
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '更新失敗',
+              content: res.data.message.join('、'),
+            });
+          }
         });
     },
     delProductModal(item) {

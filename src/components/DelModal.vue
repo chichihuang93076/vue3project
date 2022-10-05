@@ -14,12 +14,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{tempProduct.title}}
+        是否刪除{{tempProduct.title}}?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
         <button type="button" class="btn btn-primary"
-        @click="$emit('delete-product',tempProduct)">確認</button>
+        @click="$emit('delete-product',tempProduct)">確認刪除</button>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal';
+import modalMixin from '@/mixins/modalMixin';
 
 export default {
   props: {
@@ -48,17 +48,7 @@ export default {
       tempProduct: {},
     };
   },
-  methods: {
-    showModal() {
-      this.modal.show();
-    },
-    hideModal() {
-      this.modal.hide();
-    },
-  },
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
+  mixins: [modalMixin],
 };
 
 </script>
