@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class="container mt-5">
@@ -15,7 +14,6 @@
               class="form-control"
               placeholder="Email address"
               required
-              autofocus
             />
         </div>
         <div class="mb-2">
